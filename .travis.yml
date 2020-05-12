@@ -1,0 +1,23 @@
+---
+os: linux
+dist: bionic
+language: ruby
+
+env:
+  - VAGRANT_BOX=trombik/ansible-freebsd-12.1-amd64
+
+before_install:
+  - yes | gem update --system --force
+  - gem install bundler
+  - |
+    if [ ! -d vagrant-run ]; do
+      git clone https://github.com/trombik/vagrant-run || exit 1
+    fi
+  - vagrant-run/bin/before_install.sh
+
+scripts:
+  - vagrant-run/bin/up.sh "${VAGRANT_BOX}"
+  - vagrant-run/bin/run.sh build.sh
+  - vagrant-run/bin/download.sh file1 foo/file2
+  - grep file1 vagrant-run/file1
+  - grep file2 vagrant-run/foo/file2
