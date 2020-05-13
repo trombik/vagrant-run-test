@@ -37,6 +37,6 @@ script:
   - vagrant-run/bin/up.sh "${VAGRANT_BOX}"
   - vagrant-run/bin/run.sh build.sh
   - mkdir dest
-  - VAGRANT_BUILD_DEST_DIR="dest" vagrant-run/bin/download.sh file1 foo/file2
+  - VAGRANT_BUILD_DEST_DIR="dest" vagrant-run/bin/download.sh
   - grep file1 dest/file1
   - grep file2 dest/foo/file2
