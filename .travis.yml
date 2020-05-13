@@ -36,6 +36,7 @@ before_install:
 script:
   - vagrant-run/bin/up.sh "${VAGRANT_BOX}"
   - vagrant-run/bin/run.sh build.sh
-  - vagrant-run/bin/download.sh file1 foo/file2
-  - grep file1 file1
-  - grep file2 foo/file2
+  - mkdir dest
+  - VAGRANT_BUILD_DEST_DIR="dest" vagrant-run/bin/download.sh file1 foo/file2
+  - grep file1 dest/file1
+  - grep file2 dest/foo/file2
